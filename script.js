@@ -1,3 +1,4 @@
+// let currentOperations = [3, "+", 2, 3, "x", 3];
 let currentOperations = [];
 let resultingOperations = [];
 
@@ -138,13 +139,19 @@ function mdasCheck() {
     }
 
     // Once we're done with multiplication and division
-    let currentIndex = 3;
-    while (currentOperations.length > 0) {
+    let currentIndex = 1;
+    let arrSize = currentOperations.length;
+    while (arrSize > 0) {
         resultingOperations.push(operate(currentOperations[currentIndex - 1], 
             currentOperations[currentIndex + 1],
             currentOperations[currentIndex]));
         
         currentOperations = currentOperations.splice(currentIndex - 1, 3);
         currentIndex += 3;
+
+        // Doing this manually because splice is not fast enough 
+        // to update before while loop check occurs. Leaves an undefined value
+        // in the resulting arr otherwise
+        arrSize -= 3; 
     }
 }
