@@ -53,6 +53,14 @@ function updateDisplay() {
     displayText.textContent = displayStr;
 }
 
+function clearCalculator() {
+    displayText.textContent = "0";
+    currentOperations = [];
+}
+
+const clearBtn = document.querySelector("#clear-btn");
+clearBtn.addEventListener("click", clearCalculator);
+
 const btnsContainer = document.querySelector(".btns-container");
 btnsContainer.addEventListener("click", (event) => {
     let target = event.target;
