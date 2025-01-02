@@ -1,0 +1,11 @@
+.digits-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+}
+
+.digit-button {
+    flex: 0 0 30%;
+    padding: 8px;
+    margin: 3px;
+}
