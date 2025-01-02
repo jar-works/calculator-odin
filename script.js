@@ -1,4 +1,5 @@
 let currentOperations = [];
+let resultingOperations = [];
 
 function add(a, b) {
     return a + b;
@@ -117,3 +118,33 @@ btnsContainer.addEventListener("click", (event) => {
 
     updateDisplay();
 })
+
+// PE(MDAS)
+function mdasCheck() {
+    while(currentOperations.some((val) => {
+        return val === "x" || val === "/";
+    })) {
+
+        const operatorIndex = currentOperations.findIndex((element) => {
+            return element === "x" || element === "/";
+        });
+        console.log(operatorIndex);
+
+        resultingOperations.push(operate(currentOperations[operatorIndex - 1], 
+            currentOperations[operatorIndex + 1],
+            currentOperations[operatorIndex]));
+        
+        currentOperations.splice(operatorIndex - 1, 3);
+    }
+
+    // Once we're done with multiplication and division
+    let currentIndex = 3;
+    while (currentOperations.length > 0) {
+        resultingOperations.push(operate(currentOperations[currentIndex - 1], 
+            currentOperations[currentIndex + 1],
+            currentOperations[currentIndex]));
+        
+        currentOperations = currentOperations.splice(currentIndex - 1, 3);
+        currentIndex += 3;
+    }
+}
