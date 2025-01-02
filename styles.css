@@ -1,3 +1,8 @@
+.main-container {
+    display: flex;
+    height: 200px;
+}
+
 .digits-container {
     display: flex;
     flex-wrap: wrap;
@@ -8,4 +13,16 @@
     flex: 0 0 30%;
     padding: 8px;
     margin: 3px;
+}
+
+.op-btn {
+    flex: 1;
+    width: 100%;
+}
+
+.operators-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items:center;
 }
