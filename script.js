@@ -16,21 +16,20 @@ function divide (a, b) {
     return a / b;
 }
 
-// Operation being either a, s, m, d
 function operator(a, b, operation) {
     let result;
 
     switch(operation) {
-        case 'a':
+        case '+':
             result = add(a, b);
             break;
-        case 's':
+        case '-':
             result = subtract(a, b);
             break;
-        case 'm':
+        case 'x':
             result = multiply(a, b);
             break;
-        case 'd':
+        case '/':
             result = divide(a, b);
             break;
     }
