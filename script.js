@@ -16,10 +16,10 @@ function divide (a, b) {
     return a / b;
 }
 
-function operator(a, b, operation) {
+function operate(a, b, operator) {
     let result;
 
-    switch(operation) {
+    switch(operator) {
         case '+':
             result = add(a, b);
             break;
