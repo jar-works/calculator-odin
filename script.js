@@ -1,3 +1,5 @@
+let currentOperations = [];
+
 function add(a, b) {
     return a + b;
 }
@@ -35,3 +37,19 @@ function operator(a, b, operation) {
 
     return result;
 }
+
+
+const displayText = document.querySelector(".display-txt");
+function updateDisplay() {
+    console.log("updating display");
+    let displayStr = "";
+    for (let i = 0; i < currentOperations.length; i++) {
+        if (typeof(currentOperations[i]) === "number") {
+            displayStr = displayStr.concat(currentOperations[i]);
+        } else {
+            displayStr = displayStr.concat(" " + currentOperations[i]);
+        }
+    }
+    displayText.textContent = displayStr;
+}
+
