@@ -103,6 +103,12 @@ function mdas() {
         });
         console.log(`Removing: ${currentOperations[operatorIndex - 1]}, ${currentOperations[operatorIndex]}, ${currentOperations[operatorIndex + 1]}`);
 
+        if (parseInt(currentOperations[operatorIndex + 1]) == 0 && currentOperations[operatorIndex] == "/") {
+            clearCalculator();
+            displayText.textContent = "CANNOT DIVIDE BY ZERO!";
+            return;
+        }
+
         resultingOperations.push(operate(currentOperations[operatorIndex - 1], 
             currentOperations[operatorIndex + 1],
             currentOperations[operatorIndex]));
