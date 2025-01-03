@@ -60,8 +60,7 @@ function clearCalculator() {
 }
 
 function displayResults() {
-    currentOperations = resultingOperations;
-    displayText.textContent = resultingOperations[0];
+    displayText.textContent = resultingOperations[resultingOperations.length - 1];
 }
 
 const clearBtn = document.querySelector("#clear-btn");
@@ -95,36 +94,39 @@ btnsContainer.addEventListener("click", (event) => {
 
 // PE(MDAS)
 function mdas() {
-    while(currentOperations.some((val) => {
+    while([...currentOperations].some((val) => {
         return val === "x" || val === "/";
     })) {
 
         const operatorIndex = currentOperations.findIndex((element) => {
             return element === "x" || element === "/";
         });
+        console.log(`Removing: ${currentOperations[operatorIndex - 1]}, ${currentOperations[operatorIndex]}, ${currentOperations[operatorIndex + 1]}`);
 
         resultingOperations.push(operate(currentOperations[operatorIndex - 1], 
             currentOperations[operatorIndex + 1],
             currentOperations[operatorIndex]));
-        
+
         currentOperations.splice(operatorIndex - 1, 3);
+        currentOperations.unshift(resultingOperations[resultingOperations.length - 1]);
     }
 
     // Once we're done with multiplication and division
-    let currentIndex = 1;
+    let opIndex = 1;
     let arrSize = currentOperations.length;
-    while (arrSize > 0) {
-        resultingOperations.push(operate(currentOperations[currentIndex - 1], 
-            currentOperations[currentIndex + 1],
-            currentOperations[currentIndex]));
+    while (arrSize >= 3) {
+        console.log("WE'VE GOT VARS LEFT");
+        resultingOperations.push(operate(currentOperations[opIndex - 1], 
+            currentOperations[opIndex + 1],
+            currentOperations[opIndex]));
         
-        currentOperations = currentOperations.splice(currentIndex - 1, 3);
-        currentIndex += 3;
+        currentOperations.splice(opIndex - 1, 3);
+        currentOperations.unshift(resultingOperations[resultingOperations.length - 1]);
 
         // Doing this manually because splice is not fast enough 
         // to update before while loop check occurs. Leaves an undefined value
         // in the resulting arr otherwise
-        arrSize -= 3; 
+        arrSize -= 3;
     }
 
     displayResults();
