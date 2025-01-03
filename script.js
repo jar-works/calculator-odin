@@ -42,7 +42,6 @@ function operate(a, b, operator) {
 
 const displayText = document.querySelector(".display-txt");
 function updateDisplay() {
-    console.log("updating display");
     let displayStr = "";
     for (let i = 0; i < currentOperations.length; i++) {
         if (typeof(currentOperations[i]) === "number" || currentOperations[i] === ".") {
@@ -79,16 +78,12 @@ btnsContainer.addEventListener("click", (event) => {
     }
 
     const targetContentType = parseInt(target.textContent);
-    console.log(`TARGET TYPE: ${targetContentType} (${target.textContent})`)
 
     if (isNaN(targetContentType)) { // Push operators always
         currentOperations.push(target.textContent);
-        // console.log(currentOperations[currentOperations.length - 1]);
-        // console.log(parseInt(target.textContent) === "number");
     } else { // Push when the last item is not a number, concat if it is
         const currentOpType = currentOperations.length > 0 ? parseInt(currentOperations[currentOperations.length - 1]) : "NaN";
         if (isNaN(currentOpType)) {
-            // console.log("NAN");
             currentOperations.push(target.textContent);
         } else {
             currentOperations[currentOperations.length - 1] = currentOperations[currentOperations.length - 1].concat(target.textContent);
@@ -107,7 +102,6 @@ function mdas() {
         const operatorIndex = currentOperations.findIndex((element) => {
             return element === "x" || element === "/";
         });
-        console.log(operatorIndex);
 
         resultingOperations.push(operate(currentOperations[operatorIndex - 1], 
             currentOperations[operatorIndex + 1],
