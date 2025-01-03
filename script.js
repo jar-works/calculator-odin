@@ -3,7 +3,7 @@ let currentOperations = [];
 let resultingOperations = [];
 
 function add(a, b) {
-    return a + b;
+    return parseInt(a) + parseInt(b);
 }
 
 function subtract(a, b) {
@@ -56,7 +56,13 @@ function updateDisplay() {
 
 function clearCalculator() {
     displayText.textContent = "0";
+    resultingOperations = [];
     currentOperations = [];
+}
+
+function displayResults() {
+    currentOperations = resultingOperations;
+    displayText.textContent = resultingOperations[0];
 }
 
 const clearBtn = document.querySelector("#clear-btn");
@@ -67,6 +73,10 @@ btnsContainer.addEventListener("click", (event) => {
     let target = event.target;
 
     if (event.target.tagName !== "BUTTON") { return }
+    if (event.target.textContent === "=") {
+        mdas();
+        return;
+    }
 
     const targetContentType = parseInt(target.textContent);
     console.log(`TARGET TYPE: ${targetContentType} (${target.textContent})`)
@@ -89,7 +99,7 @@ btnsContainer.addEventListener("click", (event) => {
 })
 
 // PE(MDAS)
-function mdasCheck() {
+function mdas() {
     while(currentOperations.some((val) => {
         return val === "x" || val === "/";
     })) {
@@ -122,4 +132,6 @@ function mdasCheck() {
         // in the resulting arr otherwise
         arrSize -= 3; 
     }
+
+    displayResults();
 }
