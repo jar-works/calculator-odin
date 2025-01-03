@@ -129,10 +129,9 @@ function mdas() {
         currentOperations.splice(opIndex - 1, 3);
         currentOperations.unshift(resultingOperations[resultingOperations.length - 1]);
 
-        // Doing this manually because splice is not fast enough 
-        // to update before while loop check occurs. Leaves an undefined value
-        // in the resulting arr otherwise
-        arrSize -= 3;
+        arrSize = currentOperations.length;
+        console.table(currentOperations);
+        console.table(resultingOperations);
     }
 
     displayResults();
